@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import datetime
 from typing import List
 
 from fastapi import Depends, FastAPI, Header, HTTPException, status
