@@ -19,7 +19,11 @@ class License(BaseModel):
 def require_token(
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
 ) -> None:
-    if credentials is None or not credentials.credentials:
+    if (
+        credentials is None
+        or not credentials.credentials
+        or credentials.scheme.lower() != "bearer"
+    ):
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 

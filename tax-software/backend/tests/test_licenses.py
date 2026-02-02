@@ -18,3 +18,10 @@ def test_current_license_success():
     body = response.json()
     assert body["id"] == "license-001"
     assert body["status"] == "active"
+
+
+def test_current_license_rejects_non_bearer_scheme():
+    response = client.get(
+        "/api/licenses/current", headers={"Authorization": "Basic abc123"}
+    )
+    assert response.status_code == 401
