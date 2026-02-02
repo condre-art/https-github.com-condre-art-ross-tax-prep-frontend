@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List
 
 from fastapi import Depends, FastAPI, Header, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel
 
 app = FastAPI(title="Tax Preparation API")
@@ -20,12 +21,14 @@ class Certificate(BaseModel):
     expires_at: datetime
 
 
-def bearer_auth(authorization: str | None = Header(default=None)) -> str:
-    if not authorization or not authorization.lower().startswith("bearer "):
+def bearer_auth(
+    credentials: HTTPAuthorizationCredentials = Depends(HTTPBearer(auto_error=False)),
+) -> str:
+    if not credentials or not credentials.scheme.lower() == "bearer":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized"
         )
-    return authorization.removeprefix("Bearer ").removeprefix("bearer ")
+    return credentials.credentials
 
 
 @app.get("/health")
