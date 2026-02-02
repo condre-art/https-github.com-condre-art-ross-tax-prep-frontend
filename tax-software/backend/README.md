@@ -17,6 +17,20 @@ Run the FastAPI app locally:
 uvicorn app.main:app --reload
 ```
 
+## Database migrations (Cloudflare D1)
+
+Apply database migrations locally:
+
+```bash
+wrangler d1 migrations apply d1 --local
+```
+
+Apply database migrations to the remote D1 database:
+
+```bash
+wrangler d1 migrations apply d1
+```
+
 ## Testing
 
 ```bash

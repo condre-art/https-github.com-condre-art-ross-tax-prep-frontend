@@ -1,0 +1,34 @@
+name = "ross-tax-prep-worker1"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+APP_NAME = "ROSS Tax & Bookkeeping"
+LEGAL_ENTITY = "ROSS TAX PREP & D&C TAXATION LLC"
+JWT_ISSUER = "ross-tax-platform"
+JWT_AUDIENCE = "admin"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "d1"
+# Replace with your D1 database id (e.g., from `wrangler d1 list`)
+database_id = "REPLACE_WITH_YOUR_D1_ID"
+
+[[r2_buckets]]
+binding = "SENSITIVE_BUCKET"
+bucket_name = "r2"
+
+# Optional: public badge icons bucket
+# [[r2_buckets]]
+# binding = "PUBLIC_BUCKET"
+# bucket_name = "public-assets"
+
+# Optional KV for rate-limit / sessions
+# [[kv_namespaces]]
+# binding = "SESSIONS_KV"
+# id = "REPLACE_WITH_KV_ID"
+
+# Optional queue for async PDF issuance jobs
+# [[queues.producers]]
+# binding = "COMPLIANCE_QUEUE"
+# queue = "compliance-queue"
