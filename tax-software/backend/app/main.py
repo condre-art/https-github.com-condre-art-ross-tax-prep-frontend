@@ -2,8 +2,6 @@ from fastapi import FastAPI, Header, HTTPException, status
 from pydantic import BaseModel, Field
 from typing import Optional
 
-LICENSE_TYPES = {"affiliate", "reseller", "enterprise"}
-
 app = FastAPI(title="Tax Preparation API")
 
 
@@ -28,9 +26,6 @@ class License(BaseModel):
 def purchase_license(payload: LicenseRequest, authorization: Optional[str] = Header(default=None, convert_underscores=False)):
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
-
-    if payload.licenseType not in LICENSE_TYPES:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid licenseType")
 
     return License(
         id=1,
