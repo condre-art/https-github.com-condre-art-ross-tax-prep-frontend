@@ -30,3 +30,12 @@ tax-software/
 ## Getting Started
 
 See `tax-software/backend/README.md` and `tax-software/frontend/README.md` for setup instructions.
+
+## Cloudflare Wrangler Secrets
+
+If you deploy to Cloudflare (Workers/Pages), create the required secrets with Wrangler:
+
+```bash
+wrangler secret put JWT_SECRET
+wrangler secret put PASSWORD_PEPPER
+```
