@@ -7,9 +7,14 @@ IRS Certificate Generation and Secure Storage
 import os
 import json
 from cryptography.fernet import Fernet
-from fastapi import APIRouter, HTTPException
+
+from fastapi import APIRouter, HTTPException, Depends
+import logging
+from ..app.main import bearer_auth, require_role
+
 
 router = APIRouter()
+logger = logging.getLogger("tax-prep-app.irs")
 
 # In production, use a secure key vault
 FERNET_KEY = os.environ.get("IRS_CERT_ENCRYPTION_KEY") or Fernet.generate_key()
@@ -42,11 +47,13 @@ def get_irs_cert(ero_id: str) -> dict:
     return json.loads(cert_json)
 
 @router.post("/irs/generate_cert")
-def api_generate_cert(ero_id: str):
+def api_generate_cert(ero_id: str, user = Depends(require_role(["admin", "ERO"]))):
+    logger.info(f"AUDIT: IRS certificate generated for ERO {ero_id} by {user.email}")
     path = generate_irs_cert(ero_id)
     return {"message": "IRS certificate generated and stored securely.", "path": path}
 
 @router.get("/irs/get_cert")
-def api_get_cert(ero_id: str):
+def api_get_cert(ero_id: str, user = Depends(require_role(["admin", "ERO"]))):
+    logger.info(f"AUDIT: IRS certificate retrieved for ERO {ero_id} by {user.email}")
     cert = get_irs_cert(ero_id)
     return cert

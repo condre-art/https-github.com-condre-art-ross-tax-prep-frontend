@@ -1,5 +1,8 @@
+
 from fastapi import APIRouter, HTTPException, status, Depends
 from .blueprint import User, Role, PermissionChangeRequest, TenantConfig, evaluate_tax_rules, auto_generate_tax_plan, auto_credit_dispute
+import logging
+logger = logging.getLogger("tax-prep-app.admin")
 
 router = APIRouter()
 
@@ -17,10 +20,14 @@ def list_users():
 def change_user_role(req: PermissionChangeRequest):
     user = next((u for u in USERS if u.id == req.user_id), None)
     if not user:
+        logger.warning(f"Role change failed: user {req.user_id} not found")
         raise HTTPException(status_code=404, detail="User not found")
     if req.admin_override or user.role == "admin":
+        old_role = user.role
         user.role = req.new_role
+        logger.info(f"AUDIT: Role changed for user {user.id} from {old_role} to {user.role} by admin_override={req.admin_override}")
         return {"status": "Role updated", "user": user}
+    logger.warning(f"Role change denied for user {user.id}: admin override required")
     raise HTTPException(status_code=403, detail="Admin override required")
 
 # White-labeling
