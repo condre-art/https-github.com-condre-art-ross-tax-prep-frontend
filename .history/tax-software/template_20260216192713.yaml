@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Image resizing service (uksb-1tthgi812) (tag:s3-lambda-resizing-python) # cspell:disable-line
+
+Parameters:
+  SourceBucketName:
+    Type: String
+    # Pass your bucket name dynamically or change it here
+    Default: my-source-bucket-name
+  DestinationBucketName:
+    Type: String
+    # Pass your bucket name dynamically or change it here
+    Default: my-destination-bucket-name
+
+Resources:
+  ## S3 bucket 
+  SourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${SOURCE_BUCKET_NAME}
+  DestinationBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${DESTINATION_BUCKET_NAME}
+
+  ## Lambda function
+  ResizerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.lambda_handler
+      Runtime: python3.14
+      MemorySize: 2048
+      Layers:
+        - arn:aws:lambda:us-east-1:175033217214:layer:graphicsmagick:2 # Replace with actual region/layer if needed
+      Policies:
+        - S3ReadPolicy:
+          BucketName: ${SOURCE_BUCKET_NAME}
+        - S3CrudPolicy:
+          BucketName: ${DESTINATION_BUCKET_NAME}
+      Environment:
+        Variables:
+          DESTINATION_BUCKETNAME: ${DESTINATION_BUCKET_NAME}
+      Events:
+        FileUpload:
+          Type: S3
+          Properties:
+            Bucket: ${SOURCE_BUCKET_NAME}
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: suffix
+                    Value: .jpeg
+Outputs:
+  SourceBucketName:
+    Value: ${SOURCE_BUCKET_NAME}
+    Description: S3 Bucket for object storage
+  DestinationBucketName:
+    Value: ${DESTINATION_BUCKET_NAME}
+    Description: S3 destination Bucket for object storage
+  FunctionArn:
+    Value: ResizerFunction # Replace with actual function ARN if needed
+    Description: ResizerFunction function  Arn

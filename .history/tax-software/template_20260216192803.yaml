@@ -1,0 +1,28 @@
+
+## LocalStack-compatible S3/Lambda YAML example
+## NOTE: This is not a deployable CloudFormation template, but a reference for local emulation.
+
+
+## Set static bucket names for local use
+SourceBucketName: localstack-source-bucket
+DestinationBucketName: localstack-destination-bucket
+
+
+## S3 buckets (create manually or via LocalStack CLI if needed)
+## aws --endpoint-url=http://localhost:4566 s3 mb s3://localstack-source-bucket
+## aws --endpoint-url=http://localhost:4566 s3 mb s3://localstack-destination-bucket
+
+
+## Lambda function (deploy manually to LocalStack)
+# Example deployment:
+# awslocal lambda create-function \
+#   --function-name ResizerFunction \
+#   --runtime python3.14 \
+#   --handler app.lambda_handler \
+#   --role arn:aws:iam::000000000000:role/lambda-role \
+#   --code S3Bucket=localstack-source-bucket,S3Key=your-zip.zip \
+#   --environment Variables={DESTINATION_BUCKETNAME=localstack-destination-bucket}
+#
+# Then create S3 event notification to trigger the Lambda on .jpeg upload
+
+# No CloudFormation outputs for LocalStack. Use CLI to inspect resources.

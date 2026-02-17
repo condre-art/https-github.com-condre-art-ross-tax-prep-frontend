@@ -1,0 +1,16 @@
+## LocalStack-compatible S3/Lambda YAML example
+## NOTE: This is not a deployable CloudFormation template, but a reference for local emulation.
+
+## Set static bucket names for local use
+SourceBucketName: localstack-source-bucket
+DestinationBucketName: localstack-destination-bucket
+
+## S3 buckets (create manually or via LocalStack CLI if needed)
+## aws --endpoint-url=http://localhost:4566 s3 mb s3://localstack-source-bucket
+## aws --endpoint-url=http://localhost:4566 s3 mb s3://localstack-destination-bucket
+
+
+cd ../../frontend
+npm install
+npm run dev
+npm test

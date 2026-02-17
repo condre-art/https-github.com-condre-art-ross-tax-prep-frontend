@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "tax-software/frontend/package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } },
+    { "src": "tax-software/backend/app/main.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "tax-software/backend/app/main.py" },
+    { "src": "/(.*)", "dest": "tax-software/frontend/dist/$1" }
+  ]
+}

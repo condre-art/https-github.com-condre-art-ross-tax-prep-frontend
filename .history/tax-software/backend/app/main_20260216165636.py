@@ -11,8 +11,6 @@ from fastapi import Depends, FastAPI, Header, HTTPException, status
 from .workflow_router import router as workflow_router
 from .admin_router import router as admin_router
 from .workforce_router import router as workforce_router
-from .irs_router import router as irs_router
-from .xml_router import router as xml_router
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel
 
@@ -21,8 +19,6 @@ app = FastAPI(title="Tax Preparation API")
 app.include_router(workflow_router, prefix="/api/workflow", tags=["Workflow"])
 app.include_router(admin_router, prefix="/api/admin", tags=["Admin"])
 app.include_router(workforce_router, prefix="/api/workforce", tags=["Workforce", "HR", "Payroll", "WhiteLabel"])
-app.include_router(irs_router, prefix="/api", tags=["IRS", "Certificates"])
-app.include_router(xml_router, prefix="/api", tags=["XML", "ExpertXML"])
 
 
 class Badge(BaseModel):

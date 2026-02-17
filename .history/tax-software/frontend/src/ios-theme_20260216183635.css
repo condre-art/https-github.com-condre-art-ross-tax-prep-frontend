@@ -1,0 +1,62 @@
+/* iOS/Apple-inspired theme for React/Vite app */
+:root {
+  --ios-bg: #f8f8f8;
+  --ios-card: #fff;
+  --ios-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --ios-border: #e0e0e0;
+  --ios-accent: #007aff;
+  --ios-dark: #222;
+  --ios-cream: #f5e9da;
+  --ios-espresso: #3b2f2f;
+  --ios-black: #000;
+  --ios-radius: 18px;
+  --ios-font: 'San Francisco', 'Helvetica Neue', Arial, sans-serif;
+}
+body {
+  background: var(--ios-bg);
+  color: var(--ios-dark);
+  font-family: var(--ios-font);
+}
+.card {
+  background: var(--ios-card);
+  border-radius: var(--ios-radius);
+  box-shadow: var(--ios-shadow);
+  border: 1px solid var(--ios-border);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.button {
+  background: var(--ios-accent);
+  color: #fff;
+  border-radius: var(--ios-radius);
+  border: none;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: var(--ios-shadow);
+  transition: background 0.2s;
+}
+.button:hover {
+  background: #005ecb;
+}
+.input {
+  border: 1px solid var(--ios-border);
+  border-radius: var(--ios-radius);
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: var(--ios-card);
+  color: var(--ios-dark);
+  margin-bottom: 1rem;
+}
+.header {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--ios-dark);
+  margin-bottom: 1rem;
+}
+.subheader {
+  font-size: 1.2rem;
+  color: var(--ios-espresso);
+  margin-bottom: 1rem;
+}
+/* Add more as needed for modals, notifications, etc. */
