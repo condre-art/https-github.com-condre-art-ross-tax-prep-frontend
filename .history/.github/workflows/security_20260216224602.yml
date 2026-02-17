@@ -1,0 +1,58 @@
+name: Security & Compliance Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install backend dependencies
+        run: |
+          cd tax-software/backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Install frontend dependencies
+        run: |
+          cd tax-software/frontend
+          npm install
+      - name: Python dependency audit
+        run: |
+          pip install pip-audit
+          pip-audit
+        working-directory: tax-software/backend
+      - name: Node.js dependency audit
+        run: |
+          npm audit --audit-level=high
+        working-directory: tax-software/frontend
+      - name: Secret scanning
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          config-path: .github/gitleaks.toml
+      - name: Lint Python
+        run: |
+          pip install flake8
+          flake8 app
+        working-directory: tax-software/backend
+      - name: Lint JS/TS
+        run: |
+          npm run lint || true
+        working-directory: tax-software/frontend
+      - name: Run backend tests
+        run: pytest
+        working-directory: tax-software/backend
+      - name: Run frontend tests
+        run: npm test
+        working-directory: tax-software/frontend
