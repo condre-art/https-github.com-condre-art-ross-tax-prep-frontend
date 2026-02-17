@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template for S3 buckets and Lambda function (converted from local dev YAML)
+
+Resources:
+  SourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: localstack-source-bucket
+
+  DestinationBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: localstack-destination-bucket
+
+  ProcessTaxReturnLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: ProcessTaxReturn
+      Handler: handler.lambda_handler
+      Runtime: python3.11
+      Role: arn:aws:iam::123456789012:role/lambda-execution-role # Replace with your IAM role ARN
+      Environment:
+        Variables:
+          BUCKET: localstack-source-bucket
+      Code:
+        S3Bucket: localstack-source-bucket
+        S3Key: lambda-code.zip # Replace with your Lambda deployment package key
+      Timeout: 30
+      MemorySize: 128
+
+Outputs:
+  SourceBucketName:
+    Value: !Ref SourceBucket
+    Description: Name of the source S3 bucket
+  DestinationBucketName:
+    Value: !Ref DestinationBucket
+    Description: Name of the destination S3 bucket
+  LambdaFunctionName:
+    Value: !Ref ProcessTaxReturnLambda
+    Description: Name of the Lambda function

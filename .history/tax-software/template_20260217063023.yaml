@@ -25,4 +25,4 @@ Lambdas:
 			BUCKET: localstack-destination-bucket
 		# Deploy manually to LocalStack using AWS CLI or scripts
 
-# For local dev, see setup.sh for provisioning steps and localstack commands. For production, use the CloudFormation template in cloudformation.yaml and deploy via GitHub Actions or AWS CLI.
+# For local dev, see setup.sh for provisioning steps
