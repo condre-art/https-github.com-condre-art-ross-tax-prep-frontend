@@ -22,6 +22,7 @@ ROLES = [
     Role(id=2, name="ERO", permissions=["start_return", "approve_return", "view_clients"]),
     Role(id=3, name="client", permissions=["start_return", "view_own"]),
     Role(id=4, name="staff", permissions=["view_clients", "assist_return"]),
+    Role(id=5, name="anon", permissions=[]),
 ]
 
 
