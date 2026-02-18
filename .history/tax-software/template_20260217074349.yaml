@@ -1,0 +1,28 @@
+
+
+# LocalStack-compatible S3/Lambda YAML reference for local emulation.
+
+SourceBucketName: localstack-source-bucket
+DestinationBucketName: localstack-destination-bucket
+
+# S3 buckets (create manually or via LocalStack CLI):
+# aws --endpoint-url=http://localhost:4566 s3 mb s3://localstack-source-bucket
+# aws --endpoint-url=http://localhost:4566 s3 mb s3://localstack-destination-bucket
+
+
+## Lambda functions for local emulation
+Lambdas:
+  - Name: ProcessTaxReturn
+    Handler: handler.lambda_handler
+    Runtime: python3.11
+    Environment:
+      BUCKET: localstack-source-bucket
+    # Deploy manually to LocalStack using AWS CLI or scripts
+  - Name: GenerateReport
+    Handler: report.lambda_handler
+    Runtime: python3.11
+    Environment:
+      BUCKET: localstack-destination-bucket
+    # Deploy manually to LocalStack using AWS CLI or scripts
+
+# For local dev, see setup.sh for provisioning steps and localstack commands. For production, use the CloudFormation template in cloudformation.yaml and deploy via GitHub Actions or AWS CLI.

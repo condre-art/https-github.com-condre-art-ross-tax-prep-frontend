@@ -1,0 +1,17 @@
+/* Example: Add more theme packs as needed. Import in App.tsx or index.tsx based on client config. */
+
+@import './ios-theme.css';
+
+/* Brand A Theme */
+.brand-a {
+  --primary-color: #0057b8;
+  --accent-color: #f5a623;
+  --background: #f7faff;
+}
+
+/* Brand B Theme */
+.brand-b {
+  --primary-color: #008060;
+  --accent-color: #ff5a36;
+  --background: #fff8f0;
+}

@@ -1,0 +1,158 @@
+.efile-kill-switch-panel {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.efile-kill-switch-status {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+.efile-enabled {
+  color: #2e7d32;
+  font-weight: bold;
+}
+.efile-disabled {
+  color: #c0392b;
+  font-weight: bold;
+}
+.efile-kill-switch-btn {
+  margin-bottom: 8px;
+}
+.efile-kill-switch-error {
+  color: red;
+  margin-top: 8px;
+}
+.efile-kill-switch-status-msg {
+  color: #888;
+  margin-top: 8px;
+}
+.irs-efile-controls {
+  margin-bottom: 12px;
+}
+.irs-efile-get {
+  margin-left: 8px;
+}
+.irs-efile-error {
+  color: red;
+  margin-top: 8px;
+}
+.irs-efile-cert {
+  background: #eee;
+  padding: 8px;
+  border-radius: 8px;
+  color: #222;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  overflow-x: auto;
+}
+.notification-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.notification-item {
+  background: #fff;
+  padding: 8px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  color: #222;
+}
+.notification-item.read {
+  background: #eee;
+}
+.notification-time {
+  font-size: 0.8rem;
+  color: #888;
+}
+.audit-log-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.audit-log-table {
+  width: 100%;
+  font-size: 0.95rem;
+}
+.chat-messages {
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+.chat-input {
+  width: 80%;
+  border: 1px solid var(--ios-border);
+  border-radius: var(--ios-radius);
+  padding: 0.5rem;
+  font-size: 1rem;
+  background: var(--ios-tan);
+  color: var(--ios-dark);
+  margin-bottom: 0.5rem;
+}
+.chat-send {
+  margin-left: 8px;
+}
+/* Enhanced iOS/Apple-inspired theme with custom colors */
+:root {
+  --ios-bg: #232323;
+  --ios-card: #fff;
+  --ios-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --ios-border: #e0e0e0;
+  --ios-accent: #ff6600; /* Burnt orange */
+  --ios-dark: #222;
+  --ios-cream: #f5e9da;
+  --ios-espresso: #3b2f2f;
+  --ios-brown: #7c4a2d;
+  --ios-tan: #e6d3b3;
+  --ios-white: #fff;
+  --ios-grey: #bdbdbd;
+  --ios-black: #000;
+  --ios-radius: 18px;
+  --ios-font: 'San Francisco', 'Helvetica Neue', Arial, sans-serif;
+}
+body {
+  background: var(--ios-bg);
+  color: var(--ios-white);
+  font-family: var(--ios-font);
+}
+.card {
+  background: var(--ios-card);
+  border-radius: var(--ios-radius);
+  box-shadow: var(--ios-shadow);
+  border: 1px solid var(--ios-border);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: var(--ios-dark);
+}
+.button {
+  background: var(--ios-accent);
+  color: var(--ios-white);
+  border-radius: var(--ios-radius);
+  border: none;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: var(--ios-shadow);
+  transition: background 0.2s;
+}
+.button:hover {
+  background: #d35400;
+}
+.input {
+  border: 1px solid var(--ios-border);
+  border-radius: var(--ios-radius);
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: var(--ios-tan);
+  color: var(--ios-dark);
+  margin-bottom: 1rem;
+}
+.header {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--ios-white);
+  margin-bottom: 1rem;
+}
+.subheader {
+  font-size: 1.2rem;
+  color: var(--ios-espresso);
+  margin-bottom: 1rem;
+}
+/* Add more as needed for modals, notifications, etc. */
